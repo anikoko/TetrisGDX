@@ -1,0 +1,9 @@
+DONE 0. add all figures from classic tetris
+DONE 1. implement rotate (arrow up)
+BUG 2. implement drop (arrow down)  
+DONE 3. implement full row removal from the field
+DONE 4. implement game over   
+DONE 5. add score calculation and visualization
+DONE 6. add difficulty level support 
+FIX  7. (increase speed of the game when score reaches some limits) 
+
