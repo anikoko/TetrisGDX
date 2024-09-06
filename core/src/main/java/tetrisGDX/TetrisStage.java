@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import tetris.Controller;
@@ -42,6 +43,7 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 	private TetrisModel model;
 	public Controller controller;
 	private TetrisTextRenderer textRenderer;
+	private Timer.Task task;
 	float speed = 1.0f;
 
 	final List<ScreenListener> screenListeners = new ArrayList<>();
@@ -71,16 +73,8 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		model.addListener(controller);
 		model.addStageListener(this);
 		
-
+		scheduleTask();
 		
-		Timer.schedule(new Timer.Task() {
-			@Override
-			public void run() {
-				controller.slideDown();
-			}
-		}, 1.0f, levelHasChanged(0));
-		System.out.println(speed);
-
 		Gdx.input.setInputProcessor(this);
 
 		addListener(new InputListener() {
@@ -123,6 +117,18 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		});
 
 	}
+	public void scheduleTask() {
+		task = new Timer.Task() {
+
+			@Override
+			public void run() {
+				controller.slideDown();
+				
+			}
+		};
+		Timer.schedule(task, 1.0f, speed);
+	}
+	
 	
 	@Override
 	public void draw() {
@@ -137,6 +143,7 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		}
 	}
 
+// <----------- Graphics ------------>	
 	@Override
 	public void drawBoxAt(int x, int y, int size, int colorIndex) {
 //		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -176,14 +183,17 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		// TODO Auto-generated method stub
 		
 	}
+// <--------------- Stage Listener --------->
 	@Override
-	public float levelHasChanged(int level) {
-//		speed = 1.0f *(float)Math.pow(0.9f, level - 1);
-		
-		speed = speed / 2;
-		
-		System.out.println("speed: " + speed);		
-		return speed;
+	public void levelHasChanged(int level) {
+		speed = (float) Math.pow(0.9f, level);
+		rescheduleTask();
+	}
+	public void rescheduleTask() {
+		if (task != null) {
+	        task.cancel();
+	    }
+	    scheduleTask();
 	}
 
  
