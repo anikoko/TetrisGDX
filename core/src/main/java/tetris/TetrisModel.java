@@ -65,6 +65,12 @@ public class TetrisModel implements GameEventsListener {
 		
 		state.figure = FigureFactory.createNextFigure(state.randomInt);
 		state.position = new Pair(state.width / 2 - 2, 0);
+		
+	    if (!isNewFiguresPositionValid(state.position, state.figure)) {
+	        gameOver();
+	    } else {
+	        notifyListeners();
+	    }
 	}
 
 	public void calculateScore() {
@@ -115,9 +121,7 @@ public class TetrisModel implements GameEventsListener {
 			initFigure();
 			if (!isNewFiguresPositionValid(state.position, state.figure)) {
 				gameOver();
-				return;
 			}
-			notifyListeners();
 		}
 	}
 

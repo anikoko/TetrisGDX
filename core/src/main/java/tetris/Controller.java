@@ -39,11 +39,7 @@ public class Controller implements ModelListener, GameEventsListener {
 	}
 	@Override
 	public boolean gameOver() {
-		if(model.gameOver) {
-			return true;
-		}
-	
-		return false;
+		return model.gameOver;
 		
 	}
 	

@@ -33,10 +33,7 @@ public class View {
 		graphics.drawBoxAt(ORIGIN + col * BOX_SIZE, ORIGIN + row * BOX_SIZE, BOX_SIZE, value);
 	}
 	
-	public void writeRestart(String text, int row, int col) {
-		graphics.drawRestart(text, row, col);
 
-	}
 	
 	void showScore(int score) {
 		graphics.showScore(score);

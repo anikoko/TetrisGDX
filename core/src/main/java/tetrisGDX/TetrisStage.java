@@ -135,8 +135,6 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 // <----------- Graphics ------------>	
 	@Override
 	public void drawBoxAt(int x, int y, int size, int colorIndex) {
-//		Gdx.gl.glClearColor(0, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Camera camera = getViewport().getCamera();
 		camera.update();
 
@@ -148,11 +146,6 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		shape.end();
 	}
 
-	@Override
-	public void drawRestart(String text, int row, int col) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void showScore(int score) {
@@ -163,12 +156,7 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 	public void showLevel(int level) {
 		textRenderer.setLevel("Level: " + level);
 	}
-
-	@Override
-	public void drawGameOver(String text, int row, int col) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 // <--------------- Stage Listener --------->
 	@Override
 	public void levelHasChanged(int level) {
