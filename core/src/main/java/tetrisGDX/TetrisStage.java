@@ -117,17 +117,6 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		});
 
 	}
-	public void scheduleTask() {
-		task = new Timer.Task() {
-
-			@Override
-			public void run() {
-				controller.slideDown();
-				
-			}
-		};
-		Timer.schedule(task, 1.0f, speed);
-	}
 	
 	
 	@Override
@@ -167,15 +156,12 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 
 	@Override
 	public void showScore(int score) {
-		textRenderer.setScore("Score: " + score);
-		
+		textRenderer.setScore("Score: " + score);		
 	}
 
 	@Override
 	public void showLevel(int level) {
 		textRenderer.setLevel("Level: " + level);
-
-		
 	}
 
 	@Override
@@ -189,6 +175,19 @@ public class TetrisStage extends Stage implements Graphics, StageListener{
 		speed = (float) Math.pow(0.9f, level);
 		rescheduleTask();
 	}
+	
+	public void scheduleTask() {
+		task = new Timer.Task() {
+
+			@Override
+			public void run() {
+				controller.slideDown();
+				
+			}
+		};
+		Timer.schedule(task, 1.0f, speed);
+	}
+	
 	public void rescheduleTask() {
 		if (task != null) {
 	        task.cancel();

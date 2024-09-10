@@ -272,7 +272,7 @@ public class TetrisModel implements GameEventsListener {
 			
 			numberOfLinesCleared++;
 			tenLinesCleared++;
-			if (tenLinesCleared == 1) {
+			if (tenLinesCleared == 10) {
 				level++;
 				tenLinesCleared = 0;
 				for (ModelListener modelListener : listeners) {
